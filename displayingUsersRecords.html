@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<h2>Json Place Holder - Users</h2>
+<button type="button" onclick="loadDoc()">GET USERS </button>
+<center>
+<table id="result">
+</table>
+</center>
+<script>
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+  
+   data = JSON.parse(this.responseText)
+   displayUsers(data);
+    }
+  };
+  xhttp.open("GET", "http://jsonplaceholder.typicode.com/users");
+  xhttp.send();
+}
+
+function displayUsers(users){
+	console.log(users);
+	
+
+	data = "<tr><th>Name</th><th>Email</th><th>City</th><th>Phone</th><th>Website</th></tr>"
+
+	for (let i=0;i<users.length;i++){
+		user = users[i];
+		data = data+`<tr><td>${user.name}</td><td>${user.email}</td><td>${user.address.city}</td><td>${user.phone}</td><td>${user.website}</td></tr>`
+	}
+
+	document.getElementById("result").innerHTML=data;
+
+}
+</script>
+<style>
+table,tr,th,td
+{
+border:1px solid ;
+Background-Color:#DEBA84;
+Border-color:black;
+BorderWidth:1px;
+CellPadding:3px ;
+CellSpacing:2px;
+ BorderStyle:None;
+}
+
+button {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+
+button:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+</script>
+</body>
+</html>
